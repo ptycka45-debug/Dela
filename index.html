@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Дела на день — Ежедневный трекер задач</title>
+  <meta name="theme-color" content="#222D39" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Дела на день" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAGQElEQVR4nO3dvW4dRRjG8deIklugoaNEQkrBR08KFAlcRNDgCzCRQuRrsEKkxBdgGlAKgxRRhB5BAUKipKPhFlIimWqS5chnz3zuzLzP/9ckkrXxrM/7zDu7O+uYAQAAAAAAAIBrR70HkOLs7OK69xgQ5/z8dIraGnaQFLs/I4ZiqAEdKvqr50+3GgoKHd++u/r1UcIwxCD2FT4F78e+QPQOQtdvvlv4FLyO3UD0CkKXb0rhI+gdhE2/GYWPfXoFYbMALIufwsc+yyBsEYLm34DCR46tgvBaq3/YjOJHvmW9tHwm1CwAFD9KbRGCJq0lDJbCRy1hSVR7OVS9A1D8aCHUU+1OUDUAFD9aahGCagGg+LGF2iGoEgCKH1uqGYLiC4rZi//7k9df/v3Ty387jmQ7Xs65xoVxUQBmvtW5LIJdMxfFGm/nXONhWZUl0GzFDx9q1F12AGZe+qzNhDFfn5HXcy69HsgKwMzFD39KQtB0LxAwuuQAMPtjRLldgA4AaUkBYPbHyHK6wJyX/mZ2ffok/+AX99v++yNqfM5HF19mH9tTdAcYZfa/Pn3irzgdGOVzSe0CU10DjPADxrrZPqOoAPSe/UeZXRCn9+eV0gWm6gBAbcMHgJl/XjN8dgcD0PO3NM/wA8S63p/hofqN7gC97/4AKWLrddglUMuZ45M3HhV9fUY9z7l3F1gzbACALUz7JLhUmPF+WDwh9TjzLyme8yGrr5H1vP8/cttEul5bJQ69N8wSCNIIAKQRAEgjAJBGACCNAEAaAYA0AgBpBADSCACkEQBIIwCQRgAgjQBA2rDvA/z+wXz/Ywn2u3XRewQ3owNAGgGANAIAaQQA0ggApBEASCMAkEYAII0AQBoBgDQCAGnD7gVK9eNfv2Qf+/Hb71ccCWbiogOUFH+N4zEvFwEAchEASCMAkObmIjjWyZ0HdvnsYdaxX3/zR+XRzOOrL97tPYQmpDrAyZ0H//szhXLxm/k9f6kABLkdAP64DsByps+Z9eGf22uAfcsdZn8sue0ANxU6xY9dbgNgVrfgvd4FieX1/N0ugYLLZw+Lbn0ueS0CZa47QMDSB/tIBADYhwBAmosAlO7n530AXW4ugili5HDRAYBcBADSCACkEQBIIwCQRgAgjQBAGgGANAIAaW6eBP/z01n2sW9+dF5xJJiJiw5QUvw1jse83HQAM7N37v2cfMyfjz9sMBLMwkUHAHIRAEhztQRq7dbx/d5D6Oa3q0e9h9AEHSCScvGb+T1/AgBpBADSCACkEQBIIwCRvN4FieX1/LkNmsBrESijA0AaAYA0V0sgNrYhlYsOULqfn/cBdLnpABQxcrjoAEAuAgBpBADSCACkEQBIIwCQRgAgjQBAGgGANDdPgr89+Tv72M8v36o4EszERQcoKf4ax2NebjqAmdm9Xz9LPubxe981GAlm4aIDALkIAKS5WgK1NuNvR+M95nV0gEgzFr/ZvOPeCgGANAIAaQQA0ggApBGASLPeTZl13FvhNmgCiskfOgCkEQBIc7UEYmMbUrnoAKX7+XkfQJebDkARI4eLDgDkIgCQRgAgjQBAGgGANAIAaQQA0ggApK0G4Pz89MjM7Pj23W1GA1QU6jbU8U3oAJA2bAD4bQZ+jPxZDhsAYAvRAehxHTDyzIE4vT7D2Ho9GIC1C4gtEIJ5jfDZHapflkCQNsX7AGEm4aX0OYww88eK6gCjPA+Y6QeraoTPKOb+fzBFB1iiG4xphMLPkXSBe3Z2cW1mdvX8aZvRAIVSZn8zLoIhLikAo1wLADdJnf3N6AAQlxwAugBGlDP7m9EBIC4rAHQBjCR39jcr6ACEACMoKX6zSksgQoAeatRdUQB67xQFzMrqsLgDsBRCD6VLn6DKEogQYEu1it+s4m1QQoAt1Cx+s8rPAQgBWqpd/GYNHoQRArTQovjNErdDpwhbp83YPo18y4m0xV3HZlshloOlGyBH6+I3a7wXiBAg1xbFb9ZwCbSLJRFibFX4waZPcpchMCMIeGV3hbDVLoMuWxkIAoJehR903ctDEHT1LvxgiM1su0EICIQf+26C9N5QOUQAgn1BCAjEPA7d9etd+MEQg7jJoTBgPqMU/dJwA1pDKOYxYrEDAAAAAABA1X+HwRZ5czZvYQAAAABJRU5ErkJggg==" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,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" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --sky: #5BB2EE;
+      --cyan: #9CD7E6;
+      --sand: #EBD8C6;
+      --ocean: #219BCA;
+      --ochre: #CE8F3D;
+      --purple: #8F3AA4;
+      --rust: #77322A;
+      --sage: #9DAF8A;
+      --slate-purp: #777792;
+      --charcoal: #222D39;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background-color: #EBD8C6;
+      color: #222D39;
+      -webkit-tap-highlight-color: transparent;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .radio-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 9999px;
+      border: 2px solid #222D39;
+      background-color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+    .radio-dot.checked::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background-color: currentColor;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-12">
+
+  <!-- Шапка с кнопками «На день» и «Отложенные» на самой верхней панели -->
+  <header style="background-color: #222D39;" class="text-white shadow-md">
+    <div class="max-w-4xl mx-auto px-3 sm:px-4 py-2.5 space-y-2">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <div style="background-color: #219BCA; border-color: #9CD7E6;" class="w-8 h-8 rounded-xl border flex items-center justify-center shrink-0">
+            <svg style="color: #ffffff;" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h1 class="text-base sm:text-lg font-extrabold tracking-tight truncate leading-tight">Дела на день</h1>
+            <p style="color: #9CD7E6;" class="text-[11px] truncate leading-tight">Невыполненные дела переносятся автоматически</p>
+          </div>
+        </div>
+
+        <button id="installAppBtn" onclick="installPWA()" style="background-color: #5BB2EE; color: #222D39; border-color: #9CD7E6;" class="hidden px-2.5 py-1 rounded-lg font-extrabold text-xs border shadow-2xs transition items-center gap-1 shrink-0">
+          <span>Установить</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-1.5">
+        <button
+          id="tabBtn_day"
+          type="button"
+          onclick="switchMainTab('day')"
+          class="h-8 px-2.5 rounded-xl border text-xs font-extrabold transition flex items-center justify-center gap-1.5"
+        >
+          <span>На день</span>
+        </button>
+        <button
+          id="tabBtn_deferred"
+          type="button"
+          onclick="switchMainTab('deferred')"
+          class="h-8 px-2.5 rounded-xl border text-xs font-extrabold transition flex items-center justify-center gap-1.5"
+        >
+          <span>Отложенные</span>
+          <span id="deferredCountBadge" class="px-1.5 py-0.2 rounded-full text-[10px] font-black">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-3 sm:px-4 pt-2.5 space-y-2.5">
+
+    <!-- Листание по дням: [ < ] [ 20.11.2026 · пт v ] [ > ] + Сегодня -->
+    <div class="flex items-center justify-between gap-1.5">
+      <div class="flex items-center gap-1.5 flex-1 min-w-0">
+        <button
+          onclick="shiftDate(-1)"
+          style="background-color: #f8efe6; color: #3b2416; border-color: #d9c2ab;"
+          class="w-10 h-10 rounded-xl border font-black text-base flex items-center justify-center shadow-2xs transition active:scale-95 shrink-0"
+          title="Предыдущий день"
+        >
+          &lt;
+        </button>
+
+        <div
+          style="background-color: #f8efe6; color: #3b2416; border-color: #d9c2ab;"
+          class="relative flex-1 min-w-0 h-10 px-3 rounded-xl border shadow-2xs flex items-center justify-between gap-2"
+        >
+          <span id="dateDisplayLabel" class="text-sm font-extrabold truncate">
+            20.11.2026 · пт
+          </span>
+          <svg style="color: #3b2416;" class="w-4 h-4 shrink-0 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+          <input
+            id="datePickerInput"
+            type="date"
+            onchange="onDatePickerChange(this.value)"
+            class="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
+            aria-label="Выбрать дату"
+          />
+        </div>
+
+        <button
+          onclick="shiftDate(1)"
+          style="background-color: #f8efe6; color: #3b2416; border-color: #d9c2ab;"
+          class="w-10 h-10 rounded-xl border font-black text-base flex items-center justify-center shadow-2xs transition active:scale-95 shrink-0"
+          title="Следующий день"
+        >
+          &gt;
+        </button>
+      </div>
+
+      <button
+        id="todayJumpBtn"
+        onclick="goToday()"
+        style="background-color: #219BCA; color: #ffffff; border-color: #222D39;"
+        class="h-10 px-2.5 rounded-xl border font-extrabold text-xs shrink-0 transition"
+      >
+        Сегодня
+      </button>
+    </div>
+
+    <!-- ВКЛАДКА 1: ДЕЛА НА ДЕНЬ -->
+    <div id="mainTab_day" class="space-y-2.5">
+
+    <!-- КОМПАКТНЫЙ БЛОК ДОБАВЛЕНИЯ ДЕЛА СВЕРХУ НА ВИДУ -->
+    <section id="taskFormCard" style="background-color: #ffffff; border-color: #9CD7E6;" class="rounded-2xl p-3 shadow-xs border-2 space-y-2">
+      <div class="flex items-center justify-between gap-2">
+        <span id="formTitle" style="color: #222D39;" class="text-xs sm:text-sm font-extrabold">Добавить дело</span>
+        <button id="cancelEditBtn" onclick="cancelEditTask()" style="background-color: #EBD8C6; color: #77322A; border-color: #77322A;" class="hidden text-[11px] font-extrabold px-2 py-0.5 rounded-lg border">
+          Отменить правку
+        </button>
+      </div>
+
+      <!-- Строка 1: Что нужно сделать -->
+      <input
+        id="taskTextInput"
+        type="text"
+        onkeydown="if(event.key==='Enter') saveTask()"
+        placeholder="Что нужно сделать..."
+        style="background-color: #EBD8C6; border-color: #9CD7E6; color: #222D39;"
+        class="w-full h-9 px-3 rounded-xl border text-sm font-bold focus:outline-none"
+      />
+
+      <!-- Строка 2: Кнопка выбора категории (открывает окно со списком и кнопкой Добавить/удалить категорию) + кнопка «Добавить» -->
+      <div class="flex items-center gap-2">
+        <button
+          id="taskCategoryTriggerBtn"
+          type="button"
+          onclick="openCategoryPickerModal()"
+          style="background-color: #EBD8C6; border-color: #9CD7E6; color: #222D39;"
+          class="flex-1 min-w-0 h-9 px-3 rounded-xl border text-xs sm:text-sm font-bold flex items-center justify-between gap-2 text-left transition"
+        >
+          <span id="selectedCategoryLabel" class="truncate">Без категории</span>
+          <svg style="color: #222D39;" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <button
+          id="saveTaskBtn"
+          type="button"
+          onclick="saveTask()"
+          style="background-color: #219BCA; color: #ffffff; border-color: #222D39;"
+          class="h-9 px-4 rounded-xl font-extrabold text-xs sm:text-sm border shadow-2xs transition active:scale-[0.99] shrink-0 whitespace-nowrap"
+        >
+          Добавить
+        </button>
+      </div>
+
+      <!-- Строка 3: Важность + окошко прикрепления 📌 справа в том же ряду -->
+      <div class="flex items-center justify-between gap-2 pt-0.5 flex-wrap">
+        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+          <button type="button" onclick="selectPriority('high')" class="inline-flex items-center gap-1.5 text-xs font-extrabold cursor-pointer select-none">
+            <span id="prioDot_high" style="color: #77322A; border-color: #77322A;" class="radio-dot"></span>
+            <span>🔴 Важно</span>
+          </button>
+
+          <button type="button" onclick="selectPriority('medium')" class="inline-flex items-center gap-1.5 text-xs font-extrabold cursor-pointer select-none">
+            <span id="prioDot_medium" style="color: #219BCA; border-color: #219BCA;" class="radio-dot checked"></span>
+            <span>🟢 Средне</span>
+          </button>
+
+          <button type="button" onclick="selectPriority('low')" class="inline-flex items-center gap-1.5 text-xs font-extrabold cursor-pointer select-none">
+            <span id="prioDot_low" style="color: #777792; border-color: #777792;" class="radio-dot"></span>
+            <span>⚪ Потом</span>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onclick="togglePinInput()"
+          style="background-color: #EBD8C6; border-color: #9CD7E6; color: #222D39;"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-xs font-extrabold cursor-pointer select-none shrink-0"
+          title="Прикрепить к этому дню (не переносится на другой день)"
+        >
+          <span id="pinDot" style="color: #219BCA; border-color: #222D39;" class="radio-dot"></span>
+          <span>📌</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- КОМПАКТНЫЙ ПОСТРОЧНЫЙ СПИСОК ДЕЛ НА ДЕНЬ НИЖЕ -->
+    <section style="background-color: #ffffff; border-color: #9CD7E6;" class="rounded-2xl p-3 shadow-xs border-2 space-y-2">
+      <div class="flex items-center justify-between gap-2 pb-1.5 border-b" style="border-color: #EBD8C6;">
+        <div id="listDayHeading" style="color: #222D39;" class="text-sm font-extrabold">
+          Дела на день
+        </div>
+        <div id="dayStatsText" style="color: #777792;" class="text-xs font-extrabold shrink-0">
+          0 / 0
+        </div>
+      </div>
+
+      <div id="tasksContainer" class="divide-y" style="border-color: #EBD8C6;"></div>
+    </section>
+
+    </div><!-- /#mainTab_day -->
+
+    <!-- ВКЛАДКА 2: СПИСОК ОТЛОЖЕННЫХ ДЕЛ (НЕ МОЗОЛЯТ ГЛАЗА НА ДЕНЬ, НО НЕ ЗАБУДУТСЯ) -->
+    <div id="mainTab_deferred" class="space-y-2.5 hidden">
+      <section style="background-color: #ffffff; border-color: #9CD7E6;" class="rounded-2xl p-3 shadow-xs border-2 space-y-2">
+        <div class="flex items-center justify-between gap-2 pb-1.5 border-b" style="border-color: #EBD8C6;">
+          <div style="color: #222D39;" class="text-sm font-extrabold">
+            Отложенные дела
+          </div>
+          <div id="deferredStatsText" style="color: #777792;" class="text-xs font-extrabold shrink-0">
+            0 задач
+          </div>
+        </div>
+
+        <div id="deferredContainer" class="divide-y" style="border-color: #EBD8C6;"></div>
+      </section>
+    </div><!-- /#mainTab_deferred -->
+
+    <!-- РЕЗЕРВНОЕ КОПИРОВАНИЕ (ЭКСПОРТ / ИМПОРТ) -->
+    <section style="background-color: #ffffff; border-color: #9CD7E6;" class="rounded-2xl p-3 shadow-xs border flex flex-wrap items-center justify-between gap-2">
+      <span style="color: #777792;" class="text-xs font-bold">Резервная копия дел и категорий:</span>
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          onclick="exportBackupJSON()"
+          style="background-color: #EBD8C6; color: #222D39; border-color: #777792;"
+          class="h-8 px-3 rounded-xl border text-xs font-extrabold transition"
+        >
+          Сохранить копию
+        </button>
+        <label
+          style="background-color: #9CD7E6; color: #222D39; border-color: #5BB2EE;"
+          class="h-8 px-3 rounded-xl border text-xs font-extrabold flex items-center cursor-pointer transition"
+        >
+          <span>Импорт</span>
+          <input type="file" accept=".json" onchange="importBackupJSON(event)" class="hidden" />
+        </label>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА И УПРАВЛЕНИЯ КАТЕГОРИЯМИ -->
+  <div id="categoryModal" style="background-color: rgba(34, 45, 57, 0.55);" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div style="background-color: #ffffff; border-color: #9CD7E6;" class="rounded-3xl max-w-md w-full shadow-2xl border-2 overflow-hidden flex flex-col max-h-[82vh]">
+
+      <!-- Список вариантов для выбора (Без категории + все категории с кружочками) -->
+      <div id="categoryPickerList" class="overflow-y-auto divide-y flex-1" style="border-color: #EBD8C6;"></div>
+
+      <!-- Панель добавления новой категории (открывается по кнопке «Добавить / удалить категорию») -->
+      <div id="addCategoryInlineBox" style="background-color: #EBD8C6; border-color: #9CD7E6;" class="hidden p-3 border-t space-y-2">
+        <div class="flex items-center gap-2">
+          <input
+            id="newCategoryInput"
+            type="text"
+            onkeydown="if(event.key==='Enter') addCategory()"
+            placeholder="Название категории..."
+            style="background-color: #ffffff; border-color: #9CD7E6; color: #222D39;"
+            class="flex-1 min-w-0 h-9 px-3 rounded-xl border text-sm font-bold focus:outline-none"
+          />
+          <button
+            type="button"
+            onclick="addCategory()"
+            style="background-color: #9DAF8A; color: #222D39; border-color: #222D39;"
+            class="h-9 px-3 rounded-xl font-extrabold text-xs border shrink-0"
+          >
+            ОК
+          </button>
+        </div>
+      </div>
+
+      <!-- Нижняя строка окна с кнопкой «Добавить / удалить категорию» -->
+      <div style="background-color: #f8efe6; border-color: #9CD7E6;" class="p-3 border-t flex items-center justify-between gap-2">
+        <button
+          id="toggleAddDelCatBtn"
+          type="button"
+          onclick="toggleCategoryManageMode()"
+          style="background-color: #219BCA; color: #ffffff; border-color: #222D39;"
+          class="flex-1 h-10 px-3 rounded-xl font-extrabold text-xs sm:text-sm border transition truncate"
+        >
+          Добавить / удалить категорию
+        </button>
+        <button
+          type="button"
+          onclick="closeCategoryModal()"
+          style="background-color: #ffffff; color: #222D39; border-color: #777792;"
+          class="h-10 px-3.5 rounded-xl font-extrabold text-xs sm:text-sm border shrink-0"
+        >
+          Закрыть
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TASKS_STORAGE_KEY = 'daily_tasks_items_v3';
+    const CATS_STORAGE_KEY = 'daily_tasks_categories_v2';
+
+    const DEFAULT_CATEGORIES = ['купить', 'авито', 'идея', 'сказать', 'дом', 'авто'];
+    const WEEKDAYS_SHORT_RU = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
+    let tasks = [];
+    let categories = [];
+    let selectedDate = getTodayISO();
+    let selectedPriority = 'medium';
+    let selectedPinned = false;
+    let selectedCategory = '';
+    let categoryManageMode = false;
+    let editingTaskId = null;
+    let activeMainTab = 'day';
+    let deferredPrompt = null;
+
+    function switchMainTab(tab) {
+      activeMainTab = tab;
+      const dayEl = document.getElementById('mainTab_day');
+      const defEl = document.getElementById('mainTab_deferred');
+      const btnDay = document.getElementById('tabBtn_day');
+      const btnDef = document.getElementById('tabBtn_deferred');
+      const badge = document.getElementById('deferredCountBadge');
+
+      if (tab === 'day') {
+        dayEl.classList.remove('hidden');
+        defEl.classList.add('hidden');
+        btnDay.style.backgroundColor = '#219BCA';
+        btnDay.style.color = '#ffffff';
+        btnDay.style.borderColor = '#222D39';
+
+        btnDef.style.backgroundColor = '#f8efe6';
+        btnDef.style.color = '#3b2416';
+        btnDef.style.borderColor = '#d9c2ab';
+        badge.style.backgroundColor = '#EBD8C6';
+        badge.style.color = '#222D39';
+      } else {
+        dayEl.classList.add('hidden');
+        defEl.classList.remove('hidden');
+        btnDef.style.backgroundColor = '#219BCA';
+        btnDef.style.color = '#ffffff';
+        btnDef.style.borderColor = '#222D39';
+        badge.style.backgroundColor = '#9CD7E6';
+        badge.style.color = '#222D39';
+
+        btnDay.style.backgroundColor = '#f8efe6';
+        btnDay.style.color = '#3b2416';
+        btnDay.style.borderColor = '#d9c2ab';
+      }
+      renderDeferredList();
+    }
+
+    function updateDeferredBadge() {
+      const count = tasks.filter(t => t.deferred && !t.done).length;
+      const totalDef = tasks.filter(t => t.deferred).length;
+      const badge = document.getElementById('deferredCountBadge');
+      if (badge) badge.textContent = String(count > 0 ? count : totalDef);
+    }
+
+    function moveTaskToDeferred(id) {
+      const t = tasks.find(x => x.id === id);
+      if (!t) return;
+      t.deferred = true;
+      t.done = false;
+      saveTasks();
+      renderAll();
+    }
+
+    function returnTaskToDay(id) {
+      const t = tasks.find(x => x.id === id);
+      if (!t) return;
+      t.deferred = false;
+      t.date = selectedDate;
+      saveTasks();
+      renderAll();
+    }
+
+    function renderDeferredList() {
+      updateDeferredBadge();
+      const defTasks = tasks.filter(t => t.deferred);
+      const statsEl = document.getElementById('deferredStatsText');
+      if (statsEl) {
+        const activeDef = defTasks.filter(t => !t.done).length;
+        statsEl.textContent = `Активно: ${activeDef} / Всего: ${defTasks.length}`;
+      }
+
+      const container = document.getElementById('deferredContainer');
+      if (!container) return;
+
+      if (!defTasks.length) {
+        container.innerHTML = `<div style="color: #777792;" class="py-5 text-center text-sm font-bold">Отложенных дел нет. Нажмите ⏳ у задачи на день, чтобы убрать её сюда.</div>`;
+        return;
+      }
+
+      const sorted = [...defTasks].sort((a, b) => {
+        if (a.done !== b.done) return a.done ? 1 : -1;
+        return priorityWeight(a.priority) - priorityWeight(b.priority);
+      });
+
+      container.innerHTML = sorted.map(t => `
+        <div
+          style="background-color: ${t.done ? '#f2f6ee' : 'transparent'}; border-color: #EBD8C6;"
+          class="py-1.5 px-0.5 flex items-center justify-between gap-1.5 transition"
+        >
+          <!-- Столбик 1: кружок важности + маленькая плашка категории под ним -->
+          <div class="flex flex-col items-center shrink-0 w-9">
+            ${priorityIcon(t.priority)}
+            ${t.category ? `
+              <span style="background-color: #f3e6f7; color: #8F3AA4; border-color: #8F3AA4;" class="mt-0.5 px-1 rounded text-[8px] font-extrabold border leading-tight truncate max-w-full">
+                ${escapeHtml(t.category)}
+              </span>
+            ` : ''}
+          </div>
+
+          <!-- Столбик 2: окошко выполнения -->
+          <button
+            onclick="toggleTaskDone(${t.id})"
+            style="background-color: ${t.done ? '#9DAF8A' : '#ffffff'}; border-color: ${t.done ? '#697d55' : '#222D39'}; color: #ffffff;"
+            class="w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition"
+            title="Отметить выполнение"
+          >
+            ${t.done ? '<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>' : ''}
+          </button>
+
+          <!-- Компактный текст задачи: нажатие открывает редактирование -->
+          <div
+            onclick="startEditTask(${t.id})"
+            class="min-w-0 flex-1 cursor-pointer"
+            title="Нажмите, чтобы отредактировать"
+          >
+            <span
+              style="color: ${t.done ? '#777792' : '#222D39'};"
+              class="text-[11px] sm:text-xs font-bold leading-tight ${t.done ? 'line-through' : ''}"
+            >
+              ${escapeHtml(t.text)}
+            </span>
+          </div>
+
+          <!-- Кнопки действий справа (без кнопки редактирования) -->
+          <div class="flex items-center gap-1 shrink-0">
+            <button
+              onclick="returnTaskToDay(${t.id})"
+              style="background-color: #9CD7E6; color: #222D39; border-color: #219BCA;"
+              class="h-6 px-1.5 rounded-lg text-[10px] font-extrabold border flex items-center justify-center transition"
+              title="Вернуть в дела на выбранный день"
+            >
+              ↩
+            </button>
+            <button
+              onclick="deleteTask(${t.id})"
+              style="background-color: #ffffff; color: #77322A; border-color: #77322A;"
+              class="w-6 h-6 rounded-lg text-[11px] font-extrabold border flex items-center justify-center transition"
+              title="Удалить"
+              aria-label="Удалить"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById('installAppBtn');
+      if (btn) {
+        btn.classList.remove('hidden');
+        btn.classList.add('inline-flex');
+      }
+    });
+
+    async function installPWA() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      document.getElementById('installAppBtn').classList.add('hidden');
+    }
+
+    function getTodayISO() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function addDaysISO(isoDate, deltaDays) {
+      const [y, m, d] = isoDate.split('-').map(Number);
+      const dt = new Date(y, m - 1, d + deltaDays);
+      const yy = dt.getFullYear();
+      const mm = String(dt.getMonth() + 1).padStart(2, '0');
+      const dd = String(dt.getDate()).padStart(2, '0');
+      return `${yy}-${mm}-${dd}`;
+    }
+
+    function formatRuDate(isoDate) {
+      const [y, m, d] = isoDate.split('-');
+      return `${d}.${m}.${y}`;
+    }
+
+    function getWeekdayShortRu(isoDate) {
+      const [y, m, d] = isoDate.split('-').map(Number);
+      const dt = new Date(y, m - 1, d);
+      return WEEKDAYS_SHORT_RU[dt.getDay()] || '';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function loadCategories() {
+      try {
+        const raw = localStorage.getItem(CATS_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            categories = parsed;
+            return;
+          }
+        }
+      } catch (e) {}
+      categories = [...DEFAULT_CATEGORIES];
+    }
+
+    function saveCategories() {
+      try {
+        localStorage.setItem(CATS_STORAGE_KEY, JSON.stringify(categories));
+      } catch (e) {}
+    }
+
+    function loadTasks() {
+      try {
+        const raw = localStorage.getItem(TASKS_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            tasks = parsed;
+          }
+        }
+      } catch (e) {}
+    }
+
+    function saveTasks() {
+      try {
+        localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+      } catch (e) {}
+    }
+
+    function rolloverUnfinishedTasks() {
+      const today = getTodayISO();
+      let changed = false;
+
+      tasks.forEach(t => {
+        if (!t.done && !t.deferred && !t.pinnedToDay && t.date < today) {
+          if (!t.carriedFrom) {
+            t.carriedFrom = t.date;
+          }
+          t.date = today;
+          changed = true;
+        }
+      });
+
+      if (changed) {
+        saveTasks();
+      }
+    }
+
+    function updateDateHeader() {
+      document.getElementById('datePickerInput').value = selectedDate;
+      document.getElementById('dateDisplayLabel').textContent = `${formatRuDate(selectedDate)} · ${getWeekdayShortRu(selectedDate)}`;
+      const todayBtn = document.getElementById('todayJumpBtn');
+      const isToday = selectedDate === getTodayISO();
+      todayBtn.style.backgroundColor = isToday ? '#9DAF8A' : '#219BCA';
+      todayBtn.style.color = isToday ? '#222D39' : '#ffffff';
+    }
+
+    function shiftDate(delta) {
+      selectedDate = addDaysISO(selectedDate, delta);
+      rolloverUnfinishedTasks();
+      renderAll();
+    }
+
+    function onDatePickerChange(val) {
+      if (!val) return;
+      selectedDate = val;
+      rolloverUnfinishedTasks();
+      renderAll();
+    }
+
+    function goToday() {
+      selectedDate = getTodayISO();
+      rolloverUnfinishedTasks();
+      renderAll();
+    }
+
+    function selectPriority(prio) {
+      selectedPriority = prio;
+      ['high', 'medium', 'low'].forEach(p => {
+        const dot = document.getElementById(`prioDot_${p}`);
+        if (p === prio) dot.classList.add('checked');
+        else dot.classList.remove('checked');
+      });
+    }
+
+    function togglePinInput() {
+      selectedPinned = !selectedPinned;
+      const dot = document.getElementById('pinDot');
+      if (selectedPinned) dot.classList.add('checked');
+      else dot.classList.remove('checked');
+    }
+
+    function updateCategoryLabel() {
+      const lbl = document.getElementById('selectedCategoryLabel');
+      if (lbl) {
+        lbl.textContent = selectedCategory ? selectedCategory : 'Без категории';
+      }
+    }
+
+    function pickCategory(catVal) {
+      selectedCategory = catVal || '';
+      updateCategoryLabel();
+      closeCategoryModal();
+    }
+
+    function openCategoryPickerModal() {
+      categoryManageMode = false;
+      document.getElementById('addCategoryInlineBox').classList.add('hidden');
+      document.getElementById('newCategoryInput').value = '';
+      renderCategoryPickerList();
+      document.getElementById('categoryModal').classList.remove('hidden');
+    }
+
+    function closeCategoryModal() {
+      categoryManageMode = false;
+      document.getElementById('categoryModal').classList.add('hidden');
+    }
+
+    function toggleCategoryManageMode() {
+      categoryManageMode = !categoryManageMode;
+      const inlineBox = document.getElementById('addCategoryInlineBox');
+      if (categoryManageMode) {
+        inlineBox.classList.remove('hidden');
+        setTimeout(() => document.getElementById('newCategoryInput').focus(), 40);
+      } else {
+        inlineBox.classList.add('hidden');
+      }
+      renderCategoryPickerList();
+    }
+
+    function addCategory() {
+      const inp = document.getElementById('newCategoryInput');
+      const name = inp.value.trim();
+      if (!name) return;
+      if (!categories.some(c => c.toLowerCase() === name.toLowerCase())) {
+        categories.push(name);
+        saveCategories();
+      }
+      selectedCategory = name;
+      updateCategoryLabel();
+      inp.value = '';
+      renderCategoryPickerList();
+    }
+
+    function deleteCategory(idx) {
+      const removed = categories[idx];
+      categories.splice(idx, 1);
+      saveCategories();
+      if (selectedCategory === removed) {
+        selectedCategory = '';
+        updateCategoryLabel();
+      }
+      renderCategoryPickerList();
+    }
+
+    function renderCategoryPickerList() {
+      const box = document.getElementById('categoryPickerList');
+      const noneChecked = selectedCategory === '';
+
+      let html = `
+        <div
+          onclick="pickCategory('')"
+          style="border-color: #EBD8C6; background-color: ${noneChecked ? '#f8efe6' : '#ffffff'};"
+          class="px-4 py-3 flex items-center justify-between gap-2 cursor-pointer transition"
+        >
+          <span style="color: #222D39;" class="text-sm sm:text-base font-extrabold">Без категории</span>
+          <span style="color: #219BCA; border-color: ${noneChecked ? '#219BCA' : '#777792'};" class="radio-dot ${noneChecked ? 'checked' : ''}"></span>
+        </div>
+      `;
+
+      html += categories.map((c, idx) => {
+        const isChecked = selectedCategory === c;
+        const escapedJs = escapeHtml(c).replace(/'/g, "\'");
+        return `
+          <div
+            style="border-color: #EBD8C6; background-color: ${isChecked ? '#f8efe6' : '#ffffff'};"
+            class="px-4 py-3 flex items-center justify-between gap-2 transition"
+          >
+            <button
+              type="button"
+              onclick="pickCategory('${escapedJs}')"
+              style="color: #222D39;"
+              class="flex-1 text-left text-sm sm:text-base font-extrabold truncate"
+            >
+              ${escapeHtml(c)}
+            </button>
+
+            <div class="flex items-center gap-2 shrink-0">
+              ${categoryManageMode ? `
+                <button
+                  type="button"
+                  onclick="event.stopPropagation(); deleteCategory(${idx})"
+                  style="background-color: #f6e3e0; color: #77322A; border-color: #77322A;"
+                  class="px-2.5 py-1 rounded-lg text-xs font-extrabold border"
+                >
+                  Удалить
+                </button>
+              ` : `
+                <button
+                  type="button"
+                  onclick="pickCategory('${escapedJs}')"
+                  aria-label="Выбрать ${escapeHtml(c)}"
+                  style="color: #219BCA; border-color: ${isChecked ? '#219BCA' : '#777792'};"
+                  class="radio-dot ${isChecked ? 'checked' : ''}"
+                ></button>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      box.innerHTML = html;
+    }
+
+    function saveTask() {
+      const text = document.getElementById('taskTextInput').value.trim();
+      const category = selectedCategory.trim();
+
+      if (!text) {
+        alert('Напишите, что нужно сделать.');
+        return;
+      }
+
+      if (editingTaskId !== null) {
+        const idx = tasks.findIndex(t => t.id === editingTaskId);
+        if (idx !== -1) {
+          tasks[idx] = {
+            ...tasks[idx],
+            text,
+            priority: selectedPriority,
+            category,
+            pinnedToDay: selectedPinned
+          };
+        }
+        editingTaskId = null;
+        document.getElementById('formTitle').textContent = 'Добавить дело';
+        document.getElementById('saveTaskBtn').textContent = 'Добавить';
+        document.getElementById('cancelEditBtn').classList.add('hidden');
+      } else {
+        tasks.push({
+          id: Date.now() + Math.random(),
+          date: selectedDate,
+          text,
+          priority: selectedPriority,
+          category,
+          pinnedToDay: selectedPinned,
+          done: false,
+          carriedFrom: null
+        });
+      }
+
+      document.getElementById('taskTextInput').value = '';
+      selectedCategory = '';
+      updateCategoryLabel();
+      selectPriority('medium');
+      selectedPinned = false;
+      document.getElementById('pinDot').classList.remove('checked');
+
+      saveTasks();
+      renderTasksList();
+    }
+
+    function startEditTask(id) {
+      const t = tasks.find(x => x.id === id);
+      if (!t) return;
+      if (t.category && !categories.includes(t.category)) {
+        categories.push(t.category);
+        saveCategories();
+      }
+
+      editingTaskId = id;
+      document.getElementById('taskTextInput').value = t.text;
+      selectedCategory = t.category || '';
+      updateCategoryLabel();
+      selectPriority(t.priority || 'medium');
+      selectedPinned = !!t.pinnedToDay;
+      const pinDot = document.getElementById('pinDot');
+      if (selectedPinned) pinDot.classList.add('checked');
+      else pinDot.classList.remove('checked');
+
+      document.getElementById('formTitle').textContent = 'Редактировать дело';
+      document.getElementById('saveTaskBtn').textContent = 'Сохранить';
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function cancelEditTask() {
+      editingTaskId = null;
+      document.getElementById('taskTextInput').value = '';
+      selectedCategory = '';
+      updateCategoryLabel();
+      selectPriority('medium');
+      selectedPinned = false;
+      document.getElementById('pinDot').classList.remove('checked');
+      document.getElementById('formTitle').textContent = 'Добавить дело';
+      document.getElementById('saveTaskBtn').textContent = 'Добавить';
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+    }
+
+    function toggleTaskDone(id) {
+      const t = tasks.find(x => x.id === id);
+      if (!t) return;
+      t.done = !t.done;
+      saveTasks();
+      renderTasksList();
+    }
+
+    function deleteTask(id) {
+      tasks = tasks.filter(x => x.id !== id);
+      if (editingTaskId === id) cancelEditTask();
+      saveTasks();
+      renderTasksList();
+    }
+
+    function priorityWeight(p) {
+      if (p === 'high') return 1;
+      if (p === 'medium') return 2;
+      return 3;
+    }
+
+    function priorityIcon(p) {
+      if (p === 'high') return '<span title="Высокая важность" class="text-sm leading-none shrink-0">🔴</span>';
+      if (p === 'medium') return '<span title="Средняя важность" class="text-sm leading-none shrink-0">🟢</span>';
+      return '<span title="Низкая важность" class="text-sm leading-none shrink-0">⚪</span>';
+    }
+
+    function pencilIconSvg() {
+      return `
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+        </svg>
+      `;
+    }
+
+    function renderTasksList() {
+      const today = getTodayISO();
+      const heading = document.getElementById('listDayHeading');
+      heading.textContent = selectedDate === today
+        ? `Сегодня · ${getWeekdayShortRu(selectedDate)}`
+        : `${formatRuDate(selectedDate)} · ${getWeekdayShortRu(selectedDate)}`;
+
+      const dayTasks = tasks.filter(t => !t.deferred && t.date === selectedDate);
+      const doneCount = dayTasks.filter(t => t.done).length;
+      document.getElementById('dayStatsText').textContent = `Выполнено: ${doneCount} / ${dayTasks.length}`;
+
+      const sorted = [...dayTasks].sort((a, b) => {
+        if (a.done !== b.done) return a.done ? 1 : -1;
+        return priorityWeight(a.priority) - priorityWeight(b.priority);
+      });
+
+      const container = document.getElementById('tasksContainer');
+      if (!sorted.length) {
+        container.innerHTML = `<div style="color: #777792;" class="py-5 text-center text-xs font-bold">Дел на этот день нет. Заполните строку выше.</div>`;
+        return;
+      }
+
+      container.innerHTML = sorted.map(t => `
+        <div
+          style="background-color: ${t.done ? '#f2f6ee' : 'transparent'}; border-color: #EBD8C6;"
+          class="py-1.5 px-0.5 flex items-center justify-between gap-1.5 transition"
+        >
+          <!-- Столбик 1 (максимально влево и компактно): кружок важности + мелкая плашка категории под ним -->
+          <div class="flex flex-col items-center shrink-0 w-9">
+            ${priorityIcon(t.priority)}
+            ${t.category ? `
+              <span style="background-color: #f3e6f7; color: #8F3AA4; border-color: #8F3AA4;" class="mt-0.5 px-1 rounded text-[8px] font-extrabold border leading-tight truncate max-w-full">
+                ${escapeHtml(t.category)}
+              </span>
+            ` : ''}
+          </div>
+
+          <!-- Столбик 2 (компактное окошко выполнения рядом со столбцом 1) -->
+          <button
+            onclick="toggleTaskDone(${t.id})"
+            style="background-color: ${t.done ? '#9DAF8A' : '#ffffff'}; border-color: ${t.done ? '#697d55' : '#222D39'}; color: #ffffff;"
+            class="w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition"
+            title="Отметить выполнение"
+          >
+            ${t.done ? '<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>' : ''}
+          </button>
+
+          <!-- Текст дела: нажатие на текст открывает редактирование -->
+          <div
+            onclick="startEditTask(${t.id})"
+            class="min-w-0 flex-1 cursor-pointer"
+            title="Нажмите, чтобы отредактировать"
+          >
+            <span
+              style="color: ${t.done ? '#777792' : '#222D39'};"
+              class="text-[11px] sm:text-xs font-bold leading-tight ${t.done ? 'line-through' : ''}"
+            >
+              ${escapeHtml(t.text)}
+            </span>
+            ${t.pinnedToDay ? `<span title="Прикреплено ко дню (не переносится)" style="color: #219BCA;" class="ml-0.5 text-[10px] font-black">📌</span>` : ''}
+          </div>
+
+          <!-- Кнопки действий справа (без кнопки редактирования) -->
+          <div class="flex items-center gap-1 shrink-0">
+            <button
+              onclick="moveTaskToDeferred(${t.id})"
+              style="background-color: #f8efe6; color: #222D39; border-color: #9CD7E6;"
+              class="w-6 h-6 rounded-lg text-[11px] font-extrabold border flex items-center justify-center transition"
+              title="Отложить"
+              aria-label="Отложить"
+            >
+              ⏳
+            </button>
+            <button
+              onclick="deleteTask(${t.id})"
+              style="background-color: #ffffff; color: #77322A; border-color: #77322A;"
+              class="w-6 h-6 rounded-lg text-[11px] font-extrabold border flex items-center justify-center transition"
+              title="Удалить"
+              aria-label="Удалить"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function exportBackupJSON() {
+      const payload = {
+        app: 'daily_tasks_tracker',
+        version: 5,
+        exportedAt: new Date().toISOString(),
+        categories,
+        tasks
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `dela_na_den_${getTodayISO()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importBackupJSON(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (Array.isArray(parsed.tasks)) {
+            tasks = parsed.tasks;
+            saveTasks();
+          }
+          if (Array.isArray(parsed.categories) && parsed.categories.length > 0) {
+            categories = parsed.categories;
+            saveCategories();
+          }
+          rolloverUnfinishedTasks();
+          updateCategoryLabel();
+          renderTasksList();
+          alert('Резервная копия успешно загружена!');
+        } catch (err) {
+          alert('Не удалось прочитать файл резервной копии.');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function renderAll() {
+      updateDateHeader();
+      updateCategoryLabel();
+      renderTasksList();
+      renderDeferredList();
+    }
+
+    loadCategories();
+    loadTasks();
+    rolloverUnfinishedTasks();
+    updateCategoryLabel();
+    selectPriority('medium');
+    switchMainTab('day');
+    renderAll();
+  </script>
+</body>
+</html>
