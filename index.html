@@ -182,15 +182,15 @@
           </button>
         </div>
 
-        <!-- Строка 1: Что нужно сделать -->
-        <input
+        <!-- Строка 1: Что нужно сделать (многострочный ввод + автонумерация по Enter) -->
+        <textarea
           id="taskTextInput"
-          type="text"
-          onkeydown="if(event.key==='Enter') saveTask()"
+          rows="2"
+          onkeydown="handleTaskInputKeydown(event)"
           placeholder="Что нужно сделать..."
           style="background-color: #EBD8C6; border-color: #9CD7E6; color: #222D39;"
-          class="w-full h-9 px-3 rounded-xl border text-sm font-bold focus:outline-none"
-        />
+          class="w-full min-h-[68px] py-2 px-3 rounded-xl border text-sm font-bold focus:outline-none resize-y leading-snug"
+        ></textarea>
 
         <!-- Строка 2: Кнопка выбора категории + кнопка «Добавить» -->
         <div class="flex items-center gap-2">
@@ -410,6 +410,35 @@
     let activeMainTab = 'day';
     let deferredPrompt = null;
 
+    function handleTaskInputKeydown(event) {
+      if (event.key !== 'Enter') return;
+
+      const textarea = event.target;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const value = textarea.value;
+
+      const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+      const currentLine = value.slice(lineStart, start);
+
+      const match = currentLine.match(/^(\s*)(\d+)([.)])\s*(.*)$/);
+      if (!match) return;
+
+      event.preventDefault();
+      const [, indent, numStr, sep, content] = match;
+
+      if (content.trim() === '') {
+        const newValue = value.slice(0, lineStart) + '\n' + value.slice(end);
+        textarea.value = newValue;
+        textarea.selectionStart = textarea.selectionEnd = lineStart + 1;
+      } else {
+        const nextPrefix = `\n${indent}${Number(numStr) + 1}${sep} `;
+        const newValue = value.slice(0, start) + nextPrefix + value.slice(end);
+        textarea.value = newValue;
+        textarea.selectionStart = textarea.selectionEnd = start + nextPrefix.length;
+      }
+    }
+
     function switchMainTab(tab) {
       activeMainTab = tab;
       const dayEl = document.getElementById('mainTab_day');
@@ -564,11 +593,11 @@
           >
             <span
               style="color: ${t.done ? '#777792' : '#222D39'};"
-              class="text-[11px] sm:text-xs font-bold leading-tight ${t.done ? 'line-through' : ''}"
+              class="block whitespace-pre-line text-[11px] sm:text-xs font-bold leading-snug ${t.done ? 'line-through' : ''}"
             >
               ${escapeHtml(t.text)}
             </span>
-            ${t.date && t.date !== getTodayISO() ? `<span style="color: #777792;" class="ml-1 text-[10px] font-semibold">(${formatRuDate(t.date)})</span>` : ''}
+            ${t.date && t.date !== getTodayISO() ? `<span style="color: #777792;" class="text-[10px] font-semibold">(${formatRuDate(t.date)})</span>` : ''}
             ${t.pinnedToDay ? `<span title="Прикреплено ко дню" style="color: #219BCA;" class="ml-0.5 text-[10px] font-black">📌</span>` : ''}
           </div>
 
@@ -699,7 +728,7 @@
           >
             <span
               style="color: ${t.done ? '#777792' : '#222D39'};"
-              class="text-[11px] sm:text-xs font-bold leading-tight ${t.done ? 'line-through' : ''}"
+              class="block whitespace-pre-line text-[11px] sm:text-xs font-bold leading-snug ${t.done ? 'line-through' : ''}"
             >
               ${escapeHtml(t.text)}
             </span>
@@ -1172,11 +1201,11 @@
           >
             <span
               style="color: ${t.done ? '#777792' : '#222D39'};"
-              class="text-[11px] sm:text-xs font-bold leading-tight ${t.done ? 'line-through' : ''}"
+              class="block whitespace-pre-line text-[11px] sm:text-xs font-bold leading-snug ${t.done ? 'line-through' : ''}"
             >
               ${escapeHtml(t.text)}
             </span>
-            ${t.pinnedToDay ? `<span title="Прикреплено ко дню (не переносится)" style="color: #219BCA;" class="ml-0.5 text-[10px] font-black">📌</span>` : ''}
+            ${t.pinnedToDay ? `<span title="Прикреплено ко дню (не переносится)" style="color: #219BCA;" class="text-[10px] font-black">📌</span>` : ''}
           </div>
 
           <div class="flex items-center gap-1 shrink-0">
